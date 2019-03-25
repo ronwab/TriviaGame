@@ -4,6 +4,7 @@ This is a trivia game. More to come..
 My Pseudo code.. ************ DELETE THESE STEPS WHEN DONE
 
 1.User clicks the start button to start the game
+
 2.Page loads with a question
   a. Question is loaded
   b. Timer starts to countdown - T-30sec
