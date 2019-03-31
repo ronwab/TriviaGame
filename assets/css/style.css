@@ -1,0 +1,20 @@
+/* #container {
+    padding-left: 300px;
+    padding-top: 30px;
+    font-size: -webkit-xxx-large;
+} */
+
+.divtext {
+    padding-left: 300px;
+    padding-top: 10px;
+    font-size: xx-large;
+}
+
+.btn {
+    margin-left: 300px;
+    font-size: larger;
+}
+
+.btn:hover {
+    background-color: yellow;
+}
