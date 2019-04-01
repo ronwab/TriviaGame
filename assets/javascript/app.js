@@ -10,7 +10,7 @@ $(document).ready(function() {
   var correctAnswersKey = [];
 
   //set of question and answers
-  var quiz = [
+  var Questions = [
     {
       question: "Which is the American Favorite sport ?",
       options: ["Soccer", "Baseball", "Rugby", "Footabll"],
@@ -49,11 +49,11 @@ $(document).ready(function() {
     }
   ];
 
-  for (var i = 0; i < quiz.length; i++) {
+  for (var i = 0; i < Questions.length; i++) {
     var answer = i + 1;
     var form = $("<form>");
-    form.append($("<h4>").text(quiz[i].question));
-    for (var j = 0; j < quiz[i].options.length; j++) {
+    form.append($("<h4>").text(Questions[i].question));
+    for (var j = 0; j < Questions[i].options.length; j++) {
       var value = j + 1;
       var div = $("<div>").addClass("form-check-inline");
       var label = $('<label for="q' + answer + value + '">').addClass(
@@ -67,21 +67,21 @@ $(document).ready(function() {
       });
       radio.addClass("form-check-input");
       label.append(radio);
-      label.append(quiz[i].options[j]);
+      label.append(Questions[i].options[j]);
       div.append(label);
       form.append(div);
     }
     form.insertBefore("#btnDone");
-    correctAnswersKey.push(quiz[i].answer);
+    correctAnswersKey.push(Questions[i].answer);
   }
 
-  $("#btnStart").click(startGame);
+  $("#btnStart").on("click", startGame);
 
   function startGame() {
     //hide button
     $("#colBtnStart").hide();
     //show timer
-    $("#timeRemain").text(TotalTime);
+    $("#remainigTime").text(TotalTime);
     $("#timer").show();
     //show options
     $("#quizContainer").show();
@@ -91,14 +91,14 @@ $(document).ready(function() {
 
   function gameTimer() {
     timeElapsed++;
-    $("#timeRemain").text(TotalTime - timeElapsed);
+    $("#remainigTime").text(TotalTime - timeElapsed);
     if (timeElapsed >= TotalTime || quizCompleted) {
       clearInterval(timer);
       showResult();
     }
   }
 
-  $("#btnDone").click(userDone);
+  $("#btnDone").on("click", userDone);
 
   function userDone() {
     quizCompleted = true;

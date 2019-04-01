@@ -34,30 +34,27 @@
 
 <body>
 
-
-
-    <div id="page1" class="my-5 w-50 container yellow-centered-box">
-
-        <div class="row my-2">
+    <div id="container">
+        <div class="row my-8" id="gameheader">
             <div>
-                <h3 id="gameTitle" class="display-4">How much do you
-                    know???</h3>
+                <h4 id="gameTitle"> lets get this show on the road </h4>
             </div>
         </div>
 
-        <div class="col-sm-12" id="btnStart">
+        <div id="row">
+            <div class="col-sm-8" id="btnStart">
 
-            <button type="button" id="btnStart" class="btn
-                    btn-primary btn-lg btn-block">Click to start</button>
+                <button type="button" id="btnStart" class="btn
+                            btn-primary btn-lg btn-block">Click to start</button>
+            </div>
         </div>
     </div>
-
 
     <div id="quizContainer">
 
         <div class="col-sm-8" id="quizCol">
 
-            <h3 id="timer" class="my-4">Time remaining :<span id="timeRemain"></span>seconds</h3>
+            <h3 id="timer" class="my-4">Time remaining :<span id="remainigTime"></span>seconds</h3>
             <button type="button" id="btnDone" class="btn
                         btn-primary btn-lg btn-block">Click to Finsh the
                 game</button>
@@ -65,12 +62,15 @@
     </div>
     </div>
 
-    <div id="resultContainer" class="row my-4">
-        <div class="col-12 text-center">
-            <h3>Game Over</h3>
-            <h4>Correct answers:<span id="correct"></span></h4>
-            <h4>Incorrect answers:<span id="incorrect"></span></h4>
-            <h4>Unanswered:<span id="unanswered"></span></h4>
+    <div id="resultContainer">
+        <div id="row">
+
+            <div id=results>
+                <h3>Game Over</h3>
+                <h4>Correct answers:<span id="correct"></span></h4>
+                <h4>Incorrect answers:<span id="incorrect"></span></h4>
+                <h4>Unanswered questions:<span id="unanswered"></span></h4>
+            </div>
         </div>
     </div>
 
