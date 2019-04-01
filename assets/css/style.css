@@ -1,20 +1,12 @@
-/* #container {
-    padding-left: 300px;
-    padding-top: 30px;
-    font-size: -webkit-xxx-large;
-} */
-
-.divtext {
-    padding-left: 300px;
-    padding-top: 10px;
-    font-size: xx-large;
-}
-
-.btn {
-    margin-left: 300px;
-    font-size: larger;
-}
-
 .btn:hover {
-    background-color: yellow;
+    background-color: green;
+}
+
+#quizcontainer {
+    margin-left: 346px;
+}
+
+body {
+    background-color: rgb(182, 197, 239);
+    background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.wallpaperscraft.com%2Fimage%2Fquestion_marks_background_signs_bright_95003_1920x1080.jpg&imgrefurl=https%3A%2F%2Fwallpaperscraft.com%2Fdownload%2Fquestion_marks_background_signs_bright_95003%2F1920x1080&docid=Y-eL0RY9az-UNM&tbnid=INIWs-o-FiXLeM%3A&vet=1&w=1920&h=1080&source=sh%2Fx%2Fim")
 }

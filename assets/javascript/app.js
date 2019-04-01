@@ -1,157 +1,129 @@
- $(document).ready(function () {
-     var correctAnswerCount = 0
-     var wrongAnswerCount = 0
-     var unAnsweredQuestionCount = 0
-     var totalQuestionCount = 5
-     var renderedQn
-     var questionCount = 0
-     var btnACount = 0
-     var btnBCount = 0
-     var btnCCount = 0
-     var btnDCount = 0
+$(document).ready(function() {
+  // variable definitions
+  var correctAnswer = 0;
+  var incorrectAnswer = 0;
+  var unansweredQuestion = 0;
+  var TotalTime = 30;
+  var timeElapsed = 0;
+  var timer;
+  var quizCompleted = false;
+  var correctAnswersKey = [];
 
+  //set of question and answers
+  var quiz = [
+    {
+      question: "Which is the American Favorite sport ?",
+      options: ["Soccer", "Baseball", "Rugby", "Footabll"],
+      answer: 4
+    },
+    {
+      question: "What is the correct name of the Atlanta based soccer team? ?",
+      options: [" United", "Rockstars", "Winners", "Mad vibes"],
+      answer: 1
+    },
+    {
+      question: 'Which of the following is considered Fake news" ?',
+      options: ["CNN", "Fox News", "ABC", "NBC"],
+      answer: 2
+    },
+    {
+      question: " Best city to live in",
+      options: ["LA", "Ancient Miami", "Atlanta", "DC"],
+      answer: 3
+    },
+    {
+      question: "which country is not part of North America?",
+      options: ["United States", "Mexico", "Canada", "Brazil"],
+      answer: 4
+    },
 
+    {
+      question: "Which of the following is not a state",
+      options: ["Florida", "Washington", "Washington DC", "Georgia"],
+      answer: 3
+    },
+    {
+      question: "Which technology have we not used in class",
+      options: ["Node", "CSS", "JS", "Ajax"],
+      answer: 1
+    }
+  ];
 
+  for (var i = 0; i < quiz.length; i++) {
+    var answer = i + 1;
+    var form = $("<form>");
+    form.append($("<h4>").text(quiz[i].question));
+    for (var j = 0; j < quiz[i].options.length; j++) {
+      var value = j + 1;
+      var div = $("<div>").addClass("form-check-inline");
+      var label = $('<label for="q' + answer + value + '">').addClass(
+        "form-check-label"
+      );
+      var radio = $("<input>").attr({
+        type: "radio",
+        id: "q" + answer + value,
+        name: "answer" + answer,
+        value: value
+      });
+      radio.addClass("form-check-input");
+      label.append(radio);
+      label.append(quiz[i].options[j]);
+      div.append(label);
+      form.append(div);
+    }
+    form.insertBefore("#btnDone");
+    correctAnswersKey.push(quiz[i].answer);
+  }
 
-     const myQuestions = [{
-             question: "Who is the strongest?",
-             answers: [
-                 "Superman",
-                 "The Terminator",
-                 "Waluigi, obviously"
-             ],
-             correctAnswer: "Waluigi, obviously"
-         },
-         {
-             question: "What is the best site ever created?",
-             answers: [
-                 "SitePoint",
-                 "Simple Steps Code",
-                 "Trick question; they're both the best"
-             ],
-             correctAnswer: "Trick question; they're both the best"
-         },
-         {
-             question: "Where is Waldo really?",
-             answers: [
-                 "Antarctica",
-                 "Exploring the Pacific Ocean",
-                 "Sitting in a tree",
-                 "Minding his own business, so stop asking"
-             ],
-             correctAnswer: "Exploring the Pacific Ocean"
-         }
-     ];
+  $("#btnStart").click(startGame);
 
+  function startGame() {
+    //hide button
+    $("#colBtnStart").hide();
+    //show timer
+    $("#timeRemain").text(TotalTime);
+    $("#timer").show();
+    //show options
+    $("#quizContainer").show();
+    //start timer
+    timer = setInterval(gameTimer, 1000);
+  }
 
+  function gameTimer() {
+    timeElapsed++;
+    $("#timeRemain").text(TotalTime - timeElapsed);
+    if (timeElapsed >= TotalTime || quizCompleted) {
+      clearInterval(timer);
+      showResult();
+    }
+  }
 
-     for (var i = 0; i < myQuestions.length; i++) {
-         // for (var j = 0; j < i; j++) {
-         console.log(myQuestions[i].question)
+  $("#btnDone").click(userDone);
 
-         $("#question").text(myQuestions[i].question)
-         $('#btnA').text(myQuestions[i].answers[0])
-         $('#btnB').text(myQuestions[i].answers[1])
-         $('#btnC').text(myQuestions[i].answers[2])
-         $('#btnD').text(myQuestions[i].answers[3])
-         // }
-         $("#question").text(myQuestions[i].question)
-         // console.log((myQuestions[i].question));
-         // $("#choices2").html(myQuestions[i].answers)
-         $("#correctAnswer").text(myQuestions[i].correctAnswer)
+  function userDone() {
+    quizCompleted = true;
+  }
 
+  function showResult() {
+    $("#timer").hide();
+    $("#quizContainer").hide();
+    //compare results with answers key
+    for (var i = 0; i < correctAnswersKey.length; i++) {
+      var index = i + 1;
+      var answer = $("input[name='answer" + index + "']:checked").val();
+      if (answer == correctAnswersKey[i]) {
+        correctAnswer++;
+      } else if (answer == undefined) {
+        unansweredQuestion++;
+      } else {
+        incorrectAnswer++;
+      }
+    }
 
-         if (myQuestions[i].answers[i] === myQuestions[i].correctAnswer) {
-             console.log(myQuestions[i].answers[i]);
-             console.log(myQuestions[i].correctAnswer);
-         }
-     }
+    $("#correct").text(correctAnswer);
+    $("#incorrect").text(incorrectAnswer);
+    $("#unanswered").text(unansweredQuestion);
 
-     //adding click events for the four buttons
-     $('#btnA').on("click", () => {
-         console.log(questionCount);
-
-         questionCount = btnACount++
-         if (questionCount != totalQuestionCount) {
-             console.log("*******************");
-             console.log(btnACount);
-             console.log(questionCount)
-             console.log(totalQuestionCount);
-         } else {
-             alert("game over")
-         }
-     });
-     $('#btnB').on("click", () => {
-         console.log(questionCount)
-
-         questionCount = btnACount++
-         if (questionCount != totalQuestionCount) {
-             console.log("*******************");
-             console.log(btnBCount);
-             console.log(questionCount)
-             console.log(totalQuestionCount);
-         } else {
-             alert("game over")
-         }
-     });
-     $('#btnC').on("click", () => {
-         console.log(questionCount)
-
-         questionCount = btnACount++
-         if (questionCount != totalQuestionCount) {
-             console.log("*******************");
-             console.log(btnCCount);
-             console.log(questionCount)
-             console.log(totalQuestionCount);
-         } else {
-             alert("game over")
-         }
-     });
-     $('#btnD').on("click", () => {
-         console.log(questionCount)
-
-         questionCount = btnACount++
-         if (questionCount != totalQuestionCount) {
-             console.log("*******************");
-             console.log(btnDCount);
-             console.log(questionCount)
-             console.log(totalQuestionCount);
-         } else {
-             alert("game over")
-         }
-     })
-
-     // increase win count
-
-     function WinCount() {
-         correctAnswerCount++
-         alert("You rock")
-
-     }
-     //increase loss count
-     function lossCount() {
-         wrongAnswerCount++
-         alert("sucker")
-     }
-     // Timer code count down.. ** * ITS WORKING
-     var timeLeft = 5
-     var countdownInterval = setInterval(countdown, 1000)
-
-     function countdown() {
-         if (timeLeft > 0) {
-             countdownInterval
-             timeLeft--
-
-             $("#countdowndiv").text(`Time left: ${timeLeft} seconds`)
-         } else {
-             $("#countdowndiv").text("Game Over")
-             clearTimeout(countdownInterval)
-         }
-     }
-
- });
-
-
-
- // slider code Needs Massaging
- //https: //www.jqueryscript.net/slider/Fully-Responsive-Flexible-jQuery-Carousel-Plugin-slick.html
+    $("#resultContainer").show();
+  }
+});
